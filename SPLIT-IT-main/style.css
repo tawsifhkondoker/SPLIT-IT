@@ -1,4 +1,4 @@
-/*RESET*/
+/* RESET & VARIABLES */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,6 +6,7 @@
 }
 
 :root {
+  /* Light theme */
   --background: #f5f5f7;
   --card: #ffffff;
   --text: #1d1d1f;
@@ -19,7 +20,18 @@
   --transition: all 0.2s ease;
 }
 
-/* BODY */
+/* Dark theme */
+body.dark {
+  --background: #000000;
+  --card: #1c1c1e;
+  --text: #f5f5f7;
+  --muted: #98989d;
+  --primary: #0a84ff;
+  --primary-hover: #409cff;
+  --border: #38383a;
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+/* BODY & TYPOGRAPHY */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   background-color: var(--background);
@@ -30,6 +42,7 @@ body {
   display: flex;
   flex-direction: column;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1, h2, h3 {
@@ -75,11 +88,11 @@ header p {
 }
 
 #themeToggle:hover {
-  background: #f0f0f2;
+  background: var(--background);
   transform: scale(1.02);
 }
 
-/*  MAIN LAYOUT */
+/* MAIN LAYOUT  */
 main {
   max-width: 1100px;
   margin: 0 auto;
@@ -96,6 +109,7 @@ main {
   padding: 2rem;
   width: 100%;
   animation: fadeIn 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .calculator {
@@ -148,6 +162,7 @@ input:focus, select:focus {
   box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
 }
 
+
 .tip-buttons {
   display: flex;
   gap: 0.5rem;
@@ -169,8 +184,8 @@ input:focus, select:focus {
 }
 
 .tip-buttons button:hover {
-  background: #f0f0f2;
-  border-color: #b0b0b5;
+  background: var(--background);
+  border-color: var(--muted);
 }
 
 .tip-buttons button.active {
@@ -222,8 +237,8 @@ button[type="submit"]:active {
 }
 
 #resetButton:hover {
-  background: #f0f0f2;
-  border-color: #b0b0b5;
+  background: var(--background);
+  border-color: var(--muted);
 }
 
 .add-person-button {
@@ -295,7 +310,7 @@ button[type="submit"]:active {
   justify-content: center;
   margin-top: 1.5rem;
   padding: 1.5rem;
-  background: #f5f5f7;
+  background: var(--background);
   border-radius: 14px;
   text-align: center;
 }
@@ -314,7 +329,7 @@ button[type="submit"]:active {
   letter-spacing: -0.03em;
 }
 
-/* PEOPLE LIST */
+/*PEOPLE LIST*/
 .people-section {
   margin-top: 2rem;
   padding-top: 1.5rem;
@@ -333,7 +348,7 @@ button[type="submit"]:active {
   margin-bottom: 1rem;
 }
 
-/* FOOTER */
+/* FOOTER*/
 footer {
   text-align: center;
   margin-top: 3rem;
@@ -342,6 +357,19 @@ footer {
   padding-bottom: 1rem;
 }
 
+/* ERROR MESSAGE */
+.error {
+  color: #d70015;
+  font-size: 0.85rem;
+  margin-top: -0.9rem;
+  margin-bottom: 1rem;
+  min-height: 1.1rem;
+}
+
+input.invalid {
+  border-color: #d70015;
+}
+/*  RESPONSIVE (Mobile) */
 @media (max-width: 768px) {
   main {
     flex-direction: column;
@@ -358,20 +386,4 @@ footer {
   .per-person-value {
     font-size: 2rem;
   }
-
 }
-
-/* ERROR MESSAGES */
-.error {
-  color: #d70015;
-  font-size: 0.85rem;
-  margin-top: -0.9rem;
-  margin-bottom: 1rem;
-  min-height: 1.1rem;
-}
-
-input.invalid {
-  border-color: #d70015;
-}
-
-
