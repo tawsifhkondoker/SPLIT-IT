@@ -17,9 +17,10 @@ const tipOutput = document.getElementById('tipOutput');
 const totalOutput = document.getElementById('totalOutput');
 const perPersonOutput = document.getElementById('perPersonOutput');
 const resetButton = document.getElementById('resetButton');
+const themeToggle = document.getElementById('themeToggle');
 const tipButtons = document.querySelectorAll('.tip-button');
 
-// currency symbol
+// currency symbol 
 function getCurrencySymbol() {
   const currency = currencySelect.value;
   if (currency === 'USD') return '$';
@@ -30,7 +31,7 @@ function getCurrencySymbol() {
   return '$';
 }
 
-// format money 
+//  format money 
 function formatMoney(amount) {
   return getCurrencySymbol() + amount.toFixed(2);
 }
@@ -78,7 +79,7 @@ function validateInputs(bill, people, taxPercent, tipPercent) {
   return isValid;
 }
 
-// calculation function 
+// Main calculate function
 function calculateBill(event) {
   event.preventDefault();
 
@@ -112,7 +113,7 @@ function calculateBill(event) {
   resultsContent.style.display = 'block';
 }
 
-// Reset 
+// Reset everything
 function resetCalculator() {
   billAmountInput.value = '';
   peopleCountInput.value = 2;
@@ -127,9 +128,60 @@ function resetCalculator() {
   tipButtons.forEach(function (button) {
     button.classList.remove('active');
   });
+
+  localStorage.removeItem('splitit-bill');
+  localStorage.removeItem('splitit-people');
+  localStorage.removeItem('splitit-tax');
+  localStorage.removeItem('splitit-tip');
+  localStorage.removeItem('splitit-currency');
 }
 
-//  Quick tip buttons
+// Theme toggle
+function toggleTheme() {
+  document.body.classList.toggle('dark');
+
+  const isDark = document.body.classList.contains('dark');
+  themeToggle.textContent = isDark ? '☀️' : '🌙';
+
+  localStorage.setItem('splitit-theme', isDark ? 'dark' : 'light');
+}
+
+function loadTheme() {
+  const savedTheme = localStorage.getItem('splitit-theme');
+
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark');
+    themeToggle.textContent = '☀️';
+  } else {
+    themeToggle.textContent = '🌙';
+  }
+}
+
+// Save settings
+function saveSettings() {
+  localStorage.setItem('splitit-bill', billAmountInput.value);
+  localStorage.setItem('splitit-people', peopleCountInput.value);
+  localStorage.setItem('splitit-tax', taxPercentInput.value);
+  localStorage.setItem('splitit-tip', tipPercentInput.value);
+  localStorage.setItem('splitit-currency', currencySelect.value);
+}
+
+//Load settings
+function loadSettings() {
+  const savedBill = localStorage.getItem('splitit-bill');
+  const savedPeople = localStorage.getItem('splitit-people');
+  const savedTax = localStorage.getItem('splitit-tax');
+  const savedTip = localStorage.getItem('splitit-tip');
+  const savedCurrency = localStorage.getItem('splitit-currency');
+
+  if (savedBill !== null) billAmountInput.value = savedBill;
+  if (savedPeople !== null) peopleCountInput.value = savedPeople;
+  if (savedTax !== null) taxPercentInput.value = savedTax;
+  if (savedTip !== null) tipPercentInput.value = savedTip;
+  if (savedCurrency !== null) currencySelect.value = savedCurrency;
+}
+
+// Quick tip buttons 
 tipButtons.forEach(function (button) {
   button.addEventListener('click', function () {
     const tipValue = button.dataset.tip;
@@ -139,10 +191,20 @@ tipButtons.forEach(function (button) {
       b.classList.remove('active');
     });
     button.classList.add('active');
+
+    saveSettings();
   });
 });
 
+
 billForm.addEventListener('submit', calculateBill);
 resetButton.addEventListener('click', resetCalculator);
-
+themeToggle.addEventListener('click', toggleTheme);
+billAmountInput.addEventListener('input', saveSettings);
+peopleCountInput.addEventListener('input', saveSettings);
+taxPercentInput.addEventListener('input', saveSettings);
+tipPercentInput.addEventListener('input', saveSettings);
+currencySelect.addEventListener('change', saveSettings);
+loadTheme();
+loadSettings();
 
