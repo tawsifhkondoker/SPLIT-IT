@@ -327,6 +327,7 @@ button[type="submit"]:active {
   color: var(--text);
   margin-top: 0.5rem;
   letter-spacing: -0.03em;
+  transition: all 0.3s ease;
 }
 
 /* PEOPLE SECTION */
@@ -517,6 +518,7 @@ input.invalid {
 
   .per-person-value {
     font-size: 2.1rem;
+    transition: all 0.3s ease;
   }
 
   .person-row input {
@@ -541,6 +543,7 @@ input.invalid {
 
   .per-person-value {
     font-size: 1.8rem;
+    transition: all 0.3s ease;
   }
 
   .tip-buttons button {
