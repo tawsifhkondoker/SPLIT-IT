@@ -31,6 +31,7 @@ body.dark {
   --border: #38383a;
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
+
 /* BODY & TYPOGRAPHY */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
@@ -92,7 +93,7 @@ header p {
   transform: scale(1.02);
 }
 
-/* MAIN LAYOUT  */
+/* MAIN LAYOUT */
 main {
   max-width: 1100px;
   margin: 0 auto;
@@ -125,7 +126,7 @@ main {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* FORM & INPUTS */
+/* INPUTS */
 h2 {
   font-size: 1.2rem;
   font-weight: 600;
@@ -161,7 +162,6 @@ input:focus, select:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
 }
-
 
 .tip-buttons {
   display: flex;
@@ -329,7 +329,7 @@ button[type="submit"]:active {
   letter-spacing: -0.03em;
 }
 
-/*PEOPLE LIST*/
+/* PEOPLE SECTION */
 .people-section {
   margin-top: 2rem;
   padding-top: 1.5rem;
@@ -348,7 +348,79 @@ button[type="submit"]:active {
   margin-bottom: 1rem;
 }
 
-/* FOOTER*/
+/* PERSON ROWS  */
+.person-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.person-row input {
+  flex: 1;
+  margin-bottom: 0;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.95rem;
+  border-radius: 10px;
+}
+
+.person-remove {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.person-remove:hover {
+  background: var(--background);
+  color: #d70015;
+}
+
+/* WHO PAYS WHAT */
+.people-split {
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+
+.people-split h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--muted);
+}
+
+.people-split ul {
+  list-style: none;
+  padding: 0;
+}
+
+.people-split li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  font-size: 0.95rem;
+  color: var(--text);
+  border-bottom: 1px dashed var(--border);
+}
+
+.people-split li:last-child {
+  border-bottom: none;
+}
+
+.people-split .person-amount {
+  font-weight: 600;
+}
+
+/* FOOTER */
 footer {
   text-align: center;
   margin-top: 3rem;
@@ -357,7 +429,7 @@ footer {
   padding-bottom: 1rem;
 }
 
-/* ERROR MESSAGE */
+/* ERROR MESSAGES */
 .error {
   color: #d70015;
   font-size: 0.85rem;
@@ -369,21 +441,110 @@ footer {
 input.invalid {
   border-color: #d70015;
 }
-/*  RESPONSIVE (Mobile) */
-@media (max-width: 768px) {
+
+/* RESPONSIVE — Tablet  */
+@media (max-width: 900px) {
   main {
-    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .card {
+    padding: 1.75rem;
+  }
+}
+
+/* RESPONSIVE — Mobile  */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem 0.75rem;
+  }
+
+  header {
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
   }
 
   header h1 {
     font-size: 1.5rem;
   }
 
+  header p {
+    font-size: 0.85rem;
+  }
+
+  #themeToggle {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  main {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
   .card {
-    padding: 1.5rem;
+    padding: 1.25rem;
+    border-radius: 16px;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  input, select {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 0.7rem 0.9rem;
+  }
+
+  .tip-buttons button {
+    padding: 0.55rem 0.4rem;
+    font-size: 0.85rem;
+  }
+
+  .button-row {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  button[type="submit"],
+  #resetButton {
+    width: 100%;
+    padding: 0.85rem;
   }
 
   .per-person-value {
-    font-size: 2rem;
+    font-size: 2.1rem;
+  }
+
+  .person-row input {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .people-split li {
+    font-size: 0.9rem;
+  }
+
+  footer {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* RESPONSIVE — Small phones  */
+@media (max-width: 380px) {
+  header h1 {
+    font-size: 1.3rem;
+  }
+
+  .per-person-value {
+    font-size: 1.8rem;
+  }
+
+  .tip-buttons button {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.3rem;
   }
 }
